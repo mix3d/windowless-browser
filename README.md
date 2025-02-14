@@ -1,5 +1,6 @@
 
 # Windowless Browser
+![icon](./build/icons/png/64x64.png)
 
 ## Overview
 The Windowless Browser project is designed for easy native 1080p screen-recording of webpages on a larger monitors without unsightly browser chrome,or using fullscreen mode on a dedicated 2nd 1080p monitor.
