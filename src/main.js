@@ -39,7 +39,9 @@ function createLauncherWindow() {
 
   // Load our launcher interface
   launcherWindow.loadFile(path.join(__dirname, 'launcher.html'));
-  launcherWindow.webContents.openDevTools();
+  // run the debugger, only in development, but commented out becuase I don't need it RN
+  // if (process.env.NODE_ENV === 'development')
+  //   launcherWindow.webContents.openDevTools();
 }
 
 // Create our content window with movement overlay
