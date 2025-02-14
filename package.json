@@ -1,0 +1,36 @@
+{
+  "name": "windowless-browser",
+  "version": "0.0.1",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron --inspect=9229 .",
+    "build": "electron-builder",
+    "generate-icons": "node build/icon-resizer.js",
+    "watch-css": "npx @tailwindcss/cli -i ./src/tailwind.css -o ./src/main.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.6",
+    "electron": "^34.2.0",
+    "electron-builder": "^25.1.8",
+    "sharp": "^0.33.5",
+    "tailwindcss": "^4.0.6"
+  },
+  "build": {
+    "appId": "dev.mjkd.windowless-browser",
+    "productName": "Windowless Browser",
+    "mac": {
+      "target": "dmg",
+      "icon": "./build/icons/mac/icon.icns"
+    },
+    "win": {
+      "target": "portable",
+      "icon": "./build/icons/win/icon.ico"
+    }
+  }
+}

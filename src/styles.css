@@ -1,0 +1,13 @@
+/* Remove default margins and scrollbars */
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Ensure content fills the window */
+html,
+body {
+  width: 100%;
+  height: 100%;
+}

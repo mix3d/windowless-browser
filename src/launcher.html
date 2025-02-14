@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add your URL</title>
+    <link
+      rel="stylesheet"
+      href="main.css"
+    />
+  </head>
+  <body>
+    <!-- Main container with consistent width and styling -->
+    <div class="bg-white p-4 w-full h-dvh flex flex-col justify-center">
+      <form
+        id="urlForm"
+        class="space-y-4 flex flex-col justify-between"
+      >
+        <!-- Search input group -->
+        <div class="flex gap-2">
+          <input
+            id="urlInput"
+            class="flex-grow rounded-md border px-3 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            placeholder="https://example.com"
+            aria-label="Search URL"
+            type="url"
+          />
+          <button
+            class="rounded-md bg-blue-600 p-2 text-sm text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            type="submit"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-search w-6 h-6 text-primary"
+            >
+              <circle
+                cx="11"
+                cy="11"
+                r="8"
+              ></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Preset buttons grid -->
+        <div
+          class="grid grid-cols-2 gap-2"
+          id="history-grid"
+        ></div>
+      </form>
+    </div>
+    <script>
+      /**
+       * Extracts the domain and path from a full URL, removing query parameters and protocol
+       *
+       * @param {string} url - The full URL to parse
+       * @returns {string} The domain and path without protocol, query params, or fragments
+       */
+      function vUrl(url) {
+        try {
+          // Create a URL object to parse the input
+          const parsedUrl = new URL(url);
+
+          // Combine domain and pathname, removing leading/trailing slashes
+          const domainAndPath =
+            `${parsedUrl.hostname}${parsedUrl.pathname}`.replace(
+              /^\/+|\/+$/g,
+              ''
+            );
+
+          return domainAndPath;
+        } catch (error) {
+          // Handle invalid URLs
+          console.error('Invalid URL:', error);
+          return '';
+        }
+      }
+
+      // Function to load and display URL history
+      function updateHistoryDisplay() {
+        const historyList = document.getElementById('history-grid');
+        const history = window.borderlessBrowser.getUrlHistory();
+        if (!history) return;
+        historyList.innerHTML = history
+          .map(
+            (url) =>
+              `<button class="preset-button px-3 truncate" onClick="loadUrl('${url}')">${vUrl(
+                url
+              )}</button>`
+          )
+          .join('');
+      }
+      function loadUrl(url) {
+        window.borderlessBrowser.launchUrl(url);
+      }
+
+      const form = document.getElementById('urlForm');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const url = document.getElementById('urlInput').value;
+        window.borderlessBrowser.launchUrl(url);
+      });
+
+      updateHistoryDisplay();
+    </script>
+  </body>
+</html>
