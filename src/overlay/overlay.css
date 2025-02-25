@@ -5,8 +5,7 @@
   place-items: center;
   background: rgba(0, 122, 255, 0.4);
   opacity: 0;
-  transition: all 0.2s;
-  -webkit-app-region: drag;
+  transition: opacity 0.15s ease-in, opacity 0.25s ease-out;
   pointer-events: none;
   z-index: 2147483647;
   cursor: grab; /* Show a grab cursor when movement is enabled */
